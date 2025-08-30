@@ -57,13 +57,12 @@ namespace TradingConsole.Core.Models
                 new SignalDriver("Bullish Trend Continuation", 10),
                 new SignalDriver("Price above VWAP", 4),
                 new SignalDriver("5m EMA confirms bullish trend", 4),
-                new SignalDriver("Institutional Intent is Bullish", 2),
                 new SignalDriver("Option Breakout Setup (Bullish)", 8),
                 new SignalDriver("True Acceptance Above Y-VAH", 5),
                 new SignalDriver("Institutional Intent is Bullish", 4),
                 new SignalDriver("5m VWAP EMA confirms bullish trend", 3),
                 new SignalDriver("IB breakout is extending", 3),
-                new SignalDriver("Bullish Pattern with Volume Confirmation", 3),
+                new SignalDriver("Bullish Pattern with Volume Confirmation", 4),
                 new SignalDriver("Price above VWAP", 2),
                 new SignalDriver("OI confirms new longs", 2),
                 new SignalDriver("Initiative Buying Above Y-VAH", 2),
@@ -78,13 +77,12 @@ namespace TradingConsole.Core.Models
                 new SignalDriver("Bearish Trend Continuation", -10),
                 new SignalDriver("Price above VWAP", -4),
                 new SignalDriver("5m EMA confirms bullish trend", -4),
-                new SignalDriver("Institutional Intent is Bullish", -2),
                 new SignalDriver("Option Breakout Setup (Bearish)", -8),
                 new SignalDriver("True Acceptance Below Y-VAL", -5),
                 new SignalDriver("Institutional Intent is Bearish", -4),
                 new SignalDriver("5m VWAP EMA confirms bearish trend", -3),
                 new SignalDriver("IB breakdown is extending", -3),
-                new SignalDriver("Bearish Pattern with Volume Confirmation", -3),
+                new SignalDriver("Bearish Pattern with Volume Confirmation", -4),
                 new SignalDriver("Price below VWAP", -2),
                 new SignalDriver("OI confirms new shorts", -2),
                 new SignalDriver("Initiative Selling Below Y-VAL", -2),
@@ -95,7 +93,8 @@ namespace TradingConsole.Core.Models
 
             RangeBoundBullishDrivers = new ObservableCollection<SignalDriver>
             {
-                 new SignalDriver("Bullish Pattern at Key Support", 4),
+                 new SignalDriver("Bullish Pattern at Key Support", 5), // High conviction
+                 new SignalDriver("Bullish Pattern (Standalone)", 2),   // Low conviction
                  new SignalDriver("Bullish Skew Divergence (Full)", 3),
                  new SignalDriver("Bullish OBV Div at range low", 3),
                  new SignalDriver("Bullish RSI Div at range low", 2),
@@ -104,13 +103,14 @@ namespace TradingConsole.Core.Models
 
             RangeBoundBearishDrivers = new ObservableCollection<SignalDriver>
             {
-                new SignalDriver("Bearish Pattern at Key Resistance", -4),
+                new SignalDriver("Bearish Pattern at Key Resistance", -5), // High conviction
+                new SignalDriver("Bearish Pattern (Standalone)", -2),    // Low conviction
                 new SignalDriver("Bearish Skew Divergence (Full)", -3),
                 new SignalDriver("Bearish OBV Div at range high", -3),
                 new SignalDriver("Range Contraction", -2),
                 new SignalDriver("Bearish RSI Div at range high", -2),
                 new SignalDriver("Low volume suggests exhaustion (Bearish)", -1),
-                new SignalDriver("Net GEX is Positive (Volatility Dampened)", -2) // NEW
+                new SignalDriver("Net GEX is Positive (Volatility Dampened)", -2)
             };
 
             VolatileBullishDrivers = new ObservableCollection<SignalDriver>
