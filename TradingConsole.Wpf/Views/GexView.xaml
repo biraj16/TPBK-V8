@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="TradingConsole.Wpf.Views.GexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodels="clr-namespace:TradingConsole.Wpf.ViewModels"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:GexViewModel, IsDesignTimeCreatable=True}"
+             Background="#FF1E1E1E" Foreground="White">
+    <UserControl.Resources>
+        <Style TargetType="Border" x:Key="MetricCard">
+            <Setter Property="Background" Value="#FF2D2D30"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MetricHeader">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MetricValue">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Underlying Price"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding UnderlyingPrice, StringFormat='{}{0:N2}'}" Foreground="White"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Net GEX (Total Exposure)"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding NetGex, StringFormat='{}{0:N0} Cr'}" Foreground="CornflowerBlue"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Max GEX Level (Pinning)"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding MaxGexLevel, StringFormat='{}{0:N0}'}" Foreground="Orange"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="3" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="GEX Flip Point (Volatility)"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding GexFlipPoint, StringFormat='{}{0:N0}'}" Foreground="Orchid"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <lvc:CartesianChart Grid.Row="1"
+                            Series="{Binding GexChartSeries}"
+                            XAxes="{Binding GexXAxes}"
+                            YAxes="{Binding GexYAxes}"
+                            LegendPosition="Bottom"
+                            LegendTextPaint="{Binding Foreground, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        </lvc:CartesianChart>
+    </Grid>
+</UserControl>

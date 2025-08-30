@@ -1,0 +1,87 @@
+﻿<Window x:Class="TradingConsole.Wpf.Views.MtmGraphWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:TradingConsole.Wpf.ViewModels"
+        xmlns:converters="clr-namespace:TradingConsole.Wpf.Converters"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MtmGraphViewModel}"
+        Title="Intraday Performance Report" Height="700" Width="1200"
+        WindowStartupLocation="CenterOwner"
+        Background="#FF1E1E1E"
+        Foreground="White">
+    <Window.Resources>
+        <converters:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
+        <Style TargetType="Border" x:Key="MetricCard">
+            <Setter Property="Background" Value="#FF2D2D30"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MetricHeader">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MetricValue">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Total MTM"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding TotalMtm, StringFormat=C, ConverterCulture=en-IN}" 
+                               Foreground="{Binding TotalMtm, Converter={StaticResource ValueToBrushConverter}}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Max MTM (High)"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding MaxMtmDataPoint.Pnl, StringFormat=C, ConverterCulture=en-IN}" Foreground="#FF4CAF50"/>
+                    <TextBlock Text="{Binding MaxMtmDataPoint.Timestamp, StringFormat='at hh:mm tt'}" Foreground="Gray" FontSize="11" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Min MTM (Low)"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding MinMtmDataPoint.Pnl, StringFormat=C, ConverterCulture=en-IN}" Foreground="#FFF44336"/>
+                    <TextBlock Text="{Binding MinMtmDataPoint.Timestamp, StringFormat='at hh:mm tt'}" Foreground="Gray" FontSize="11" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="3" Style="{StaticResource MetricCard}" Margin="5">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MetricHeader}" Text="Max Drawdown"/>
+                    <TextBlock Style="{StaticResource MetricValue}" Text="{Binding MaxDrawdown, StringFormat=C, ConverterCulture=en-IN}" Foreground="OrangeRed"/>
+                </StackPanel>
+            </Border>
+
+        </Grid>
+
+        <lvc:CartesianChart Grid.Row="1"
+                            x:Name="Chart"
+                            LegendPosition="Bottom"
+                            LegendTextPaint="{Binding #, Converter={StaticResource LvcSolidColorPaintConverter}, ConverterParameter=LightGray}">
+        </lvc:CartesianChart>
+
+    </Grid>
+</Window>
