@@ -38,6 +38,17 @@ namespace TradingConsole.Wpf.Services
             {
                 string json = File.ReadAllText(_filePath);
                 var db = JsonSerializer.Deserialize<HistoricalMarketProfileDatabase>(json);
+
+                if (db != null)
+                {
+                    foreach (var key in db.Records.Keys)
+                    {
+                        db.Records[key] = db.Records[key]
+                            .Where(p => p.TpoLevelsInfo.PointOfControl != 0)
+                            .ToList();
+                    }
+                }
+
                 return db ?? new HistoricalMarketProfileDatabase();
             }
             catch (Exception ex)
@@ -101,9 +112,6 @@ namespace TradingConsole.Wpf.Services
 
         private void PruneAndSummarizeDatabase()
         {
-            // --- THE FIX: Make pruning logic aware of trading days ---
-
-            // Get the last 10 valid trading days from today.
             var recentTradingDays = new List<DateTime>();
             var currentDate = DateTime.Today;
             while (recentTradingDays.Count < 10)
