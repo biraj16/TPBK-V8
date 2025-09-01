@@ -53,7 +53,6 @@ namespace TradingConsole.Core.Models
         {
             TrendingBullDrivers = new ObservableCollection<SignalDriver>
             {
-                // new SignalDriver("Confluence Momentum (Bullish)", 10),
                 new SignalDriver("Bullish Trend Continuation", 10),
                 new SignalDriver("Price above VWAP", 4),
                 new SignalDriver("5m EMA confirms bullish trend", 4),
@@ -63,7 +62,6 @@ namespace TradingConsole.Core.Models
                 new SignalDriver("5m VWAP EMA confirms bullish trend", 3),
                 new SignalDriver("IB breakout is extending", 3),
                 new SignalDriver("Bullish Pattern with Volume Confirmation", 4),
-                new SignalDriver("Price above VWAP", 2),
                 new SignalDriver("OI confirms new longs", 2),
                 new SignalDriver("Initiative Buying Above Y-VAH", 2),
                 new SignalDriver("High OTM Call Gamma", 2),
@@ -73,7 +71,6 @@ namespace TradingConsole.Core.Models
 
             TrendingBearDrivers = new ObservableCollection<SignalDriver>
             {
-                // new SignalDriver("Confluence Momentum (Bearish)", -10),
                 new SignalDriver("Bearish Trend Continuation", -10),
                 new SignalDriver("Price below VWAP", -4),
                 new SignalDriver("5m EMA confirms bearish trend", -4),
@@ -83,7 +80,6 @@ namespace TradingConsole.Core.Models
                 new SignalDriver("5m VWAP EMA confirms bearish trend", -3),
                 new SignalDriver("IB breakdown is extending", -3),
                 new SignalDriver("Bearish Pattern with Volume Confirmation", -4),
-                new SignalDriver("Price below VWAP", -2),
                 new SignalDriver("OI confirms new shorts", -2),
                 new SignalDriver("Initiative Selling Below Y-VAL", -2),
                 new SignalDriver("High OTM Put Gamma", -2),
@@ -288,8 +284,8 @@ namespace TradingConsole.Core.Models
             {
                 {
                     "NIFTY", new IndexLevels {
-                        NoTradeUpperBand = 24500, NoTradeLowerBand = 24900,
-                        SupportLevel = 24500, ResistanceLevel = 25500, Threshold = 20
+                        NoTradeUpperBand = 24600, NoTradeLowerBand = 24520,
+                        SupportLevel = 24500, ResistanceLevel = 24700, Threshold = 20
                     }
                 },
                 {
