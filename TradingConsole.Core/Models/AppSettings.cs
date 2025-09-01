@@ -75,8 +75,8 @@ namespace TradingConsole.Core.Models
             {
                 // new SignalDriver("Confluence Momentum (Bearish)", -10),
                 new SignalDriver("Bearish Trend Continuation", -10),
-                new SignalDriver("Price above VWAP", -4),
-                new SignalDriver("5m EMA confirms bullish trend", -4),
+                new SignalDriver("Price below VWAP", -4),
+                new SignalDriver("5m EMA confirms bearish trend", -4),
                 new SignalDriver("Option Breakout Setup (Bearish)", -8),
                 new SignalDriver("True Acceptance Below Y-VAL", -5),
                 new SignalDriver("Institutional Intent is Bearish", -4),
